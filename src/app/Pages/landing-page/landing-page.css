@@ -9,7 +9,6 @@
     background-size: 550px 550px, 350px 350px, 250px 250px;
     background-position: 0 0, 40px 60px, 130px 270px;
 
-    /* Garante que o fundo preto do Tailwind (bg-black) permaneça visível */
     background-attachment: fixed;
 
     position: relative;
