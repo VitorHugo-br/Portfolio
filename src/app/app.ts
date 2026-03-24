@@ -1,10 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MenuFlutuante } from "./Components/menu-flutuante/menu-flutuante";
+import { LandingPage } from "./Pages/landing-page/landing-page";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MenuFlutuante],
+  imports: [RouterOutlet, LandingPage],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
