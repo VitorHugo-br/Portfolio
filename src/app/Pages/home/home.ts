@@ -11,5 +11,6 @@ import { NgxTypewriterComponent } from '@omnedia/ngx-typewriter';
 })
 export class Home {
 
+  public words: string[] = ['Build', 'Create', 'Develop', 'Innovate', 'Work']
 
 }
