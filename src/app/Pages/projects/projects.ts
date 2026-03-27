@@ -1,10 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
 import { GitHubService } from '../../Services/git-hub-service';
 import { GitRepo } from '../../Models/git-repo';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-projects',
-  imports: [],
+  imports: [
+    MatCardModule
+  ],
   templateUrl: './projects.html',
   styleUrl: './projects.css',
 })
@@ -15,7 +18,8 @@ export class Projects {
 
   ngOnInit(): void {
     this.gitHubService.getRepos().then((repos) => {
-      this.repos.set(repos);
+      this.repos.set(repos.filter((repo) => repo.description !== null));
     });
   }
+
 }

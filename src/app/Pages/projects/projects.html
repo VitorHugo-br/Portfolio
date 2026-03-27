@@ -1,3 +1,19 @@
-<main class="w-dvw h-dvh bg-[#010114]">
-
+<main class="w-dvw h-dvh bg-[#010114] flex">
+    <div class="w-1/2 h-full "></div>
+    <div class="w-1/2 h-full  flex overflow-x-auto hide-scrollbar snap-x snap-mandatory items-center p-4 gap-6">
+        @for (repo of repos(); track repo.name) {
+            <a [href]="repo.htmlUrl" target="_blank" class="block min-w-[300px] max-w-[350px] w-full snap-center shrink-0 cursor-pointer no-underline">
+                <mat-card appearance="outlined" class="h-full min-h-[150px] hover:bg-gray-100 transition-colors">
+                    <mat-card-header>
+                        <mat-card-title>{{ repo.name }}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content class="mt-4">
+                        <p class="text-justify">{{ repo.description || 'Sem descrição' }}</p>
+                    </mat-card-content>
+                </mat-card>
+            </a>
+        } @empty {
+            <p class="text-white">Carregando repositórios...</p>
+        }
+    </div>
 </main>
