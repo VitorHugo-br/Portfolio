@@ -1,19 +1,49 @@
-<main class="w-dvw h-dvh bg-[#010114] flex">
-    <div class="w-1/2 h-full "></div>
-    <div class="w-1/2 h-full  flex overflow-x-auto hide-scrollbar snap-x snap-mandatory items-center p-4 gap-6">
-        @for (repo of repos(); track repo.name) {
-            <a [href]="repo.htmlUrl" target="_blank" class="block min-w-[300px] max-w-[350px] w-full snap-center shrink-0 cursor-pointer no-underline">
-                <mat-card appearance="outlined" class="h-full min-h-[150px] hover:bg-gray-100 transition-colors">
-                    <mat-card-header>
-                        <mat-card-title>{{ repo.name }}</mat-card-title>
-                    </mat-card-header>
-                    <mat-card-content class="mt-4">
-                        <p class="text-justify">{{ repo.description || 'Sem descrição' }}</p>
-                    </mat-card-content>
-                </mat-card>
-            </a>
-        } @empty {
-            <p class="text-white">Carregando repositórios...</p>
-        }
+<main class="w-dvw h-dvh bg-[#010114] flex flex-col items-center justify-center">
+    <h1 class="text-white mt-5 text-9xl select-none">Projects</h1>
+    <div class="w-full h-full relative overflow-hidden flex items-center justify-center">
+        <!-- Navegação Anterior -->
+        <button mat-icon-button (click)="previous()"
+            class="absolute left-4 z-50 bg-white/10 hover:bg-white/20 text-white rounded-full w-12 h-12 flex items-center justify-center backdrop-blur-sm transition-all"
+            [disabled]="repos().length <= 1">
+            <mat-icon>chevron_left</mat-icon>
+        </button>
+
+        <!-- Container do Coverflow -->
+        <div class="relative w-full h-full flex items-center justify-center">
+            @for (repo of repos(); track repo.name; let i = $index) {
+            <div [ngStyle]="getCardStyle(i)" class="w-[500px] shrink-0">
+                <a [href]="repo.htmlUrl" target="_blank" rel="noopener noreferrer"
+                    class="block cursor-pointer no-underline w-full h-full pointer-events-auto">
+                    <mat-card appearance="outlined"
+                        class="h-full min-h-[200px] hover:bg-gray-100 transition-colors gap-1">
+                        <mat-card-header>
+                            <mat-card-title>{{ repo.name }}</mat-card-title>
+                        </mat-card-header>
+
+                        <img src="{{ repo.thumbnail }}" alt="repo thumbnail" />
+                        <mat-card-content class="mt-4">
+                            <p class="text-justify">{{ repo.description }}</p>
+                        </mat-card-content>
+                        <mat-card-footer class="w-full flex items-center justify-center">
+                            <mat-chip-set>
+                                @for (language of repo.languages | keyvalue; track language.key) {
+                                <mat-chip>{{ language.key }}</mat-chip>
+                                }
+                            </mat-chip-set>
+                        </mat-card-footer>
+                    </mat-card>
+                </a>
+            </div>
+            } @empty {
+            <p class="text-white z-50 hover:bg-transparent">Nenhum repositório com descrição encontrado...</p>
+            }
+        </div>
+
+        <!-- Navegação Posterior -->
+        <button mat-icon-button (click)="next()"
+            class="absolute right-4 z-50 bg-white/10 hover:bg-white/20 text-white rounded-full w-12 h-12 flex items-center justify-center backdrop-blur-sm transition-all"
+            [disabled]="repos().length <= 1">
+            <mat-icon>chevron_right</mat-icon>
+        </button>
     </div>
 </main>
