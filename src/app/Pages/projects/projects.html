@@ -11,28 +11,15 @@
         <!-- Container do Coverflow -->
         <div class="relative w-full h-full flex items-center justify-center">
             @for (repo of repos(); track repo.name; let i = $index) {
-            <div [ngStyle]="getCardStyle(i)" class="w-[500px] shrink-0">
-                <a [href]="repo.htmlUrl" target="_blank" rel="noopener noreferrer"
-                    class="block cursor-pointer no-underline w-full h-full pointer-events-auto">
-                    <mat-card appearance="outlined"
-                        class="h-full min-h-[200px] hover:bg-gray-100 transition-colors gap-1">
-                        <mat-card-header>
-                            <mat-card-title>{{ repo.name }}</mat-card-title>
-                        </mat-card-header>
-
-                        <img src="{{ repo.thumbnail }}" alt="repo thumbnail" />
-                        <mat-card-content class="mt-4">
-                            <p class="text-justify">{{ repo.description }}</p>
-                        </mat-card-content>
-                        <mat-card-footer class="w-full flex items-center justify-center">
-                            <mat-chip-set>
-                                @for (language of repo.languages | keyvalue; track language.key) {
-                                <mat-chip>{{ language.key }}</mat-chip>
-                                }
-                            </mat-chip-set>
-                        </mat-card-footer>
-                    </mat-card>
-                </a>
+            <div [ngStyle]="getCardStyle(i)" class="w-[500px] h-[550px] shrink-0">
+                <app-cards
+                    [title]="repo.name"
+                    [coverImage]="repo.thumbnail"
+                    [content]="repo.description"
+                    [badges]="getLanguageKeys(repo.languages)"
+                    [actions]="[{ label: 'Acessar Repositório', emitCode: 'open_repo', icon: 'fas fa-external-link-alt' }]"
+                    (actionClicked)="handleCardAction($event, repo.htmlUrl)">
+                </app-cards>
             </div>
             } @empty {
             <p class="text-white z-50 hover:bg-transparent">Nenhum repositório com descrição encontrado...</p>

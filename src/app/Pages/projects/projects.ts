@@ -1,25 +1,22 @@
 import { Component, inject, signal } from '@angular/core';
 import { GitHubService } from '../../Services/git-hub-service';
 import { GitRepo } from '../../Models/git-repo';
-import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatChipsModule } from '@angular/material/chips';
+import { Cards } from '../../Components/cards/cards';
 
 @Component({
   selector: 'app-projects',
   imports: [
     CommonModule,
-    MatCardModule,
     MatButtonModule,
     MatIconModule,
-    MatChipsModule
+    Cards
   ],
   templateUrl: './projects.html',
   styleUrl: './projects.css',
 })
-
 export class Projects {
 
   private gitHubService = inject(GitHubService);
@@ -75,6 +72,15 @@ export class Projects {
     };
   }
 
-  
+  getLanguageKeys(languages: any): string[] {
+    if (!languages) return [];
+    return Object.keys(languages);
+  }
+
+  handleCardAction(actionCode: string, url: string) {
+    if (actionCode === 'open_repo') {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+  }
 
 }
