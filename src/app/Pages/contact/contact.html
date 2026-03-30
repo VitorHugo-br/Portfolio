@@ -1,0 +1,33 @@
+<div class="w-full h-full flex items-center justify-center bg-linear-to-b from-[#010114] to-purple-950">
+    <div class="w-2/3 h-full flex justify-center items-center m-5 gap-5">
+        <img src="/man-working.jpg" alt=""
+            class="w-1/2 h-3/4 bg-cover bg-center rounded-lg brightness-40 shadow-lg select-none">
+        <div class="w-full h-full flex justify-center items-center p-4">
+            <div
+                class="w-full h-3/4 bg-white/20 backdrop-blur-md rounded-2xl border border-white/30 shadow-lg flex flex-col justify-center items-center gap-6 md:gap-8 p-6 md:p-10">
+                <div class="w-full h-fit flex justify-center items-center flex-col gap-2 md:gap-4 text-center">
+                    <h1 class="text-4xl md:text-5xl font-bold text-white drop-shadow-md select-none">Contato</h1>
+                    <p class="text-white/90 text-sm md:text-base select-none">Entre em contato comigo através do
+                        formulário abaixo
+                    </p>
+                </div>
+                <div class="w-full sm:w-4/5 md:w-3/4 lg:w-2/3 h-fit flex justify-center items-center flex-col">
+                    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()"
+                        class="w-full flex justify-center items-stretch flex-col gap-4 text-white">
+                        <input type="text" placeholder="Nome" formControlName="nome"
+                            class="w-full h-12 rounded-lg border shadow-sm px-4 outline-none transition-all placeholder:text-white/70 bg-white/10 focus:bg-white/20"
+                            [ngClass]="{'border-red-500/80 bg-red-400/20 focus:border-red-500 focus:ring-1 focus:ring-red-500 text-red-200': isFieldInvalid('nome'), 'border-white/30 focus:border-white/60': !isFieldInvalid('nome')}">
+                        <input type="email" placeholder="Email" formControlName="email"
+                            class="w-full h-12 rounded-lg border shadow-sm px-4 outline-none transition-all placeholder:text-white/70 bg-white/10 focus:bg-white/20"
+                            [ngClass]="{'border-red-500/80 bg-red-400/20 focus:border-red-500 focus:ring-1 focus:ring-red-500 text-red-200': isFieldInvalid('email'), 'border-white/30 focus:border-white/60': !isFieldInvalid('email')}">
+                        <textarea placeholder="Mensagem" formControlName="mensagem"
+                            class="w-full min-h-[140px] rounded-lg border shadow-sm p-4 outline-none transition-all placeholder:text-white/70 resize-none bg-white/10 focus:bg-white/20"
+                            [ngClass]="{'border-red-500/80 bg-red-400/20 focus:border-red-500 focus:ring-1 focus:ring-red-500 text-red-200': isFieldInvalid('mensagem'), 'border-white/30 focus:border-white/60': !isFieldInvalid('mensagem')}"></textarea>
+                        <button type="submit"
+                            class="w-full h-12 mt-2 rounded-lg border border-white/30 shadow-md cursor-pointer bg-white/20 hover:bg-white/30 hover:scale-[1.02] font-semibold transition-all duration-300 active:scale-95">Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, output } from '@angular/core';
 
 @Component({
   selector: 'app-menu-flutuante',
@@ -10,11 +10,14 @@ import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 export class MenuFlutuante {
   isVisible = signal(false);
 
-  show(): void {
-    this.isVisible.set(true);
+  OnNavigate = output<string>();
+
+  show = () => this.isVisible.set(true);
+  hide = () => this.isVisible.set(false);
+
+  navigate(section: string, event: Event): void {
+    event.preventDefault();
+    this.OnNavigate.emit(section);
   }
 
-  hide(): void {
-    this.isVisible.set(false);
-  }
 }
