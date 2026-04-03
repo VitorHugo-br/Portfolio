@@ -12,7 +12,7 @@
                     </p>
                 </div>
                 <div class="w-full sm:w-4/5 md:w-3/4 lg:w-2/3 h-fit flex justify-center items-center flex-col">
-                    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()"
+                    <form [formGroup]="contactForm" (ngSubmit)="onSubmit($event)"
                         class="w-full flex justify-center items-stretch flex-col gap-4 text-white">
                         <input type="text" placeholder="Nome" formControlName="nome"
                             class="w-full h-12 rounded-lg border shadow-sm px-4 outline-none transition-all placeholder:text-white/70 bg-white/10 focus:bg-white/20"

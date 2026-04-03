@@ -1,15 +1,15 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { GitRepo } from '../Models/git-repo';
-import { environment } from '../../environments/environment.development';
+import { GitRepo } from '../../Models/git-repo';
+import { environment } from '../../../environments/environment.development';
 import { firstValueFrom, map } from 'rxjs';
-import { Languages } from '../Models/languages';
+import { Languages } from '../../Models/languages';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GitHubService {
-  
+
   private http = inject(HttpClient);
 
   private apiUrl = environment.API_URL;
@@ -54,7 +54,7 @@ export class GitHubService {
 
     const languagesUrl = `https://api.github.com/repos/VitorHugo-br/${repoName}/languages`;
     const request$ = this.http.get<Languages>(languagesUrl, { headers });
-    
+
     return await firstValueFrom(request$);
   }
 }

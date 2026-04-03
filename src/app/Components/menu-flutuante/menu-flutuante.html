@@ -9,10 +9,11 @@
         [class.opacity-0]="!isVisible()">
         <div class="w-1/4 h-full flex items-center justify-center">
             <img class="cursor-pointer hover:scale-110 transition-transform" src="developer_mode_tv.svg"
-                alt="imagem com o icone de code" />
+                onclick="window.location.href = ''" alt="imagem com o icone de code" />
         </div>
         <nav class="w-full h-full flex items-center justify-center gap-0.5">
-            <button class="w-full h-full flex items-center justify-center text-amber-50 hover:text-amber-500 transition-colors cursor-pointer"
+            <button
+                class="w-full h-full flex items-center justify-center text-amber-50 hover:text-amber-500 transition-colors cursor-pointer"
                 (click)="navigate('home', $event)">Inicio</button>
             <button class="w-full h-full flex items-center justify-center text-amber-50 hover:text-amber-500 transition-colors cursor-pointer"
                 (click)="navigate('projects', $event)">Projetos</button>

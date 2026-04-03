@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { GitHubService } from '../../Services/git-hub-service';
+import { GitHubService } from '../../Services/git-hub/git-hub-service';
 import { GitRepo } from '../../Models/git-repo';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';

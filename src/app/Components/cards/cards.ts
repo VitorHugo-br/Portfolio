@@ -1,11 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CardAction } from '../../Models/card-action';
 
-export interface CardAction {
-  label: string;
-  emitCode: string;
-  icon?: string;
-}
 
 @Component({
   selector: 'app-cards',
@@ -24,7 +20,7 @@ export class Cards {
   @Output() actionClicked = new EventEmitter<string>();
 
   onActionClick(code: string, event: Event) {
-    event.preventDefault(); // prevent default anchor click behavior if wrapped in <a>
+    event.preventDefault();
     event.stopPropagation();
     this.actionClicked.emit(code);
   }

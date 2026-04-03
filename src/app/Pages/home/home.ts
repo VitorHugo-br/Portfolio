@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgxTypewriterComponent } from '@omnedia/ngx-typewriter';
 
 @Component({

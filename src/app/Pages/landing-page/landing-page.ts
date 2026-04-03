@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, viewChild } from '@angular/core';
+import { Component, ElementRef, viewChild } from '@angular/core';
 import { MenuFlutuante } from "../../Components/menu-flutuante/menu-flutuante";
 import { Home } from "../home/home";
 import { Projects } from "../projects/projects";
@@ -6,7 +6,12 @@ import { Contact } from "../contact/contact";
 
 @Component({
   selector: 'app-landing-page',
-  imports: [MenuFlutuante, Home, Projects, Contact],
+  imports: [
+    MenuFlutuante,
+    Home,
+    Projects,
+    Contact
+  ],
   templateUrl: './landing-page.html',
   styleUrl: './landing-page.css',
 })
@@ -18,6 +23,7 @@ export class LandingPage {
 
   executeScroll(section: string): void {
     let element: ElementRef | undefined;
+
     switch (section) {
       case 'home':
         element = this.homeRef();
@@ -35,7 +41,5 @@ export class LandingPage {
     }
 
   }
-
-
 
 }

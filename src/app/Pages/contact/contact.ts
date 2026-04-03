@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToastService } from 'ngx-signal-toast';
+import { EmailService } from '../../Services/email-sender/email-service';
 
 @Component({
   selector: 'app-contact',
@@ -18,6 +20,10 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   styleUrl: './contact.css',
 })
 export class Contact {
+
+  private emailService = inject(EmailService);
+
+  private toastService = inject(ToastService)
 
   contactForm: FormGroup;
   isSubmitted = false;
@@ -35,18 +41,15 @@ export class Contact {
     return !!control && control.invalid && (control.dirty || control.touched || this.isSubmitted);
   }
 
-  onSubmit() {
+  onSubmit(e: Event) {
     this.isSubmitted = true;
     if (this.contactForm.valid) {
-      console.log('Formulário enviado com sucesso:', this.contactForm.value);
-      // Aqui você adicionará a lógica para efetivamente mandar o e-mail/mensagem no futuro.
-
-      // Opcional: resetar após enviar
-      // this.contactForm.reset();
-      // this.isSubmitted = false;
+      this.emailService.sendEmail(e);
+      this.toastService.success('Formulário enviado com sucesso!', {
+        title: "Contato",
+      });
     } else {
       console.log('Formulário inválido, verifique os campos.');
-      // O markAllAsTouched ajuda a ativar os estados touched de todos os campos
       this.contactForm.markAllAsTouched();
     }
   }
