@@ -7,16 +7,24 @@ import { environment } from '../../../environments/environment.development';
 })
 export class EmailService {
 
-  public sendEmail(e: Event) {
+  public async sendEmail(e: Event, nome: string, email: string, mensagem: string) {
     e.preventDefault();
 
-    emailjs.sendForm(environment.SERVICE_ID, environment.TEMPLATE_ID, e.target as HTMLFormElement, environment.PUBLIC_KEY)
-      .then((response: EmailJSResponseStatus) => {
-        console.log('SUCCESS!', response.status, response.text);
-      }, (error) => {
-        console.log('FAILED...', error);
-      });
-  }
+    var templateParams = {
+      remetente: nome,
+      emailremetente: email,
+      msg: mensagem
+    }
 
+    try {
+      const response = await emailjs.send(environment.SERVICE_ID, environment.TEMPLATE_ID, templateParams, environment.PUBLIC_KEY);
+
+      console.log('Email enviado com sucesso:', response);
+      return response;
+    } catch (error) {
+      console.error('Erro ao enviar email:', error);
+      throw error;
+    }
+  }
 
 }

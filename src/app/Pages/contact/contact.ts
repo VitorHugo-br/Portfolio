@@ -41,13 +41,20 @@ export class Contact {
     return !!control && control.invalid && (control.dirty || control.touched || this.isSubmitted);
   }
 
-  onSubmit(e: Event) {
+  async onSubmit(e: Event) {
     this.isSubmitted = true;
     if (this.contactForm.valid) {
-      this.emailService.sendEmail(e);
-      this.toastService.success('Formulário enviado com sucesso!', {
-        title: "Contato",
-      });
+      try {
+        await this.emailService.sendEmail(e, this.contactForm.value.nome, this.contactForm.value.email, this.contactForm.value.mensagem);
+        this.toastService.success('Formulário enviado com sucesso!', {
+          title: "Contato",
+        });
+      } catch (error) {
+        console.error('Falha ao enviar o formulário:', error);
+        this.toastService.error('Erro ao enviar mensagem. Tente novamente mais tarde.', {
+          title: "Contato",
+        });
+      }
     } else {
       console.log('Formulário inválido, verifique os campos.');
       this.contactForm.markAllAsTouched();
