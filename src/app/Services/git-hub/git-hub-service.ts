@@ -13,7 +13,7 @@ export class GitHubService {
   private http = inject(HttpClient);
 
   private apiUrl = environment.API_URL;
-  private token = environment.GITHUB_TOKEN;
+  private token = environment.TOKEN;
 
   async getRepos(): Promise<GitRepo[]> {
     if (!this.apiUrl || !this.token) {
