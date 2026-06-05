@@ -12,19 +12,11 @@ export class GitHubService {
 
   private http = inject(HttpClient);
 
-  private apiUrl = environment.API_URL;
-  private token = environment.TOKEN;
+  private apiUrl = "https://api.github.com/users/VitorHugo-br/repos";
 
   async getRepos(): Promise<GitRepo[]> {
-    if (!this.apiUrl || !this.token) {
-      throw new Error('API URL or Token is not defined');
-    }
 
-    const headers = new HttpHeaders({
-      Authorization: `token ${this.token}`,
-    });
-
-    const request$ = this.http.get<any[]>(this.apiUrl, { headers });
+    const request$ = this.http.get<any[]>(this.apiUrl);
     const reposData = await firstValueFrom(request$);
 
     const reposWithLanguages = await Promise.all(
@@ -44,16 +36,9 @@ export class GitHubService {
   }
 
   async getLanguages(repoName: string): Promise<Languages> {
-    if (!this.token) {
-      throw new Error('Token is not defined');
-    }
-
-    const headers = new HttpHeaders({
-      Authorization: `token ${this.token}`,
-    });
 
     const languagesUrl = `https://api.github.com/repos/VitorHugo-br/${repoName}/languages`;
-    const request$ = this.http.get<Languages>(languagesUrl, { headers });
+    const request$ = this.http.get<Languages>(languagesUrl);
 
     return await firstValueFrom(request$);
   }
